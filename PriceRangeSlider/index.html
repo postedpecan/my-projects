@@ -1,16 +1,24 @@
+<!DOCTYPE html>
 <html>
     <body>
         <div class = "main">
             <div class = "head">
                 <p>Num slider</p>
             </div>
-            <div class = "cal">
+            <div class = "rangeInp">
+                <p>Range Input</p>
+                <input type = "number" class = "min-range" value = "0">
+                <input type = "number" class = "max-range" value = "10000">
+            </div>
+            <div class = "num">
+                <p>Num input</p>
                 <input type = "number" class = "min-input" value = "500">
                 <input type = "number" class = "max-input" value = "10000"> 
             </div>
-            <div class = slide>
-                <input type = "range" class = "min-slide" min = 0 max = 10000 value = "500">
-                <input type = "range" calss = "max-slide" min = 0 max = 10000 value = "10000">
+            <div class = "slide">
+                <p>slide input</p>
+                <input type = "range" class = "min-slide" min = "0" max = "10000" value = "500">
+                <input type = "range" calss = "max-slide" min = "0" max = "10000" value = "10000">
             </div>
         </div>
         <script src="script.js"></script>
