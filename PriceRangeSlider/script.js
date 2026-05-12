@@ -2,54 +2,57 @@ const numInput = document.querySelectorAll('.num input');
 const slideInput = document.querySelectorAll('.slide input');
 const rangeInput = document.querySelectorAll('.rangeInp input');
 
-let minnum = 0, maxnum = 0 , minslide = 0 , maxslide = 0;
+let minRange = 0 ,maxRange = 10000;
 
-function findMin(a , b , min = 0){
-    if(a >= b) min = b;
-    else min = a;
-    let rangeMax = parseInt(rangeInput.max) , rangeMin = parseInt(rangeInput.min);
-    if(min > rangeMax){
-        min = rangeMax;
+function overRange(a){
+    if(a < minRange){
+        a = minRange;
     }
-    else if(min < rangeMin){
-        min = rangeMin;
+    else if(a > maxRange){
+        a = maxRange;
     }
-    return min;
-}
-
-function findMax(a , b , max = 0){
-    if(a >= b) max = a;
-    else max = b;
-    let rangeMax = parseInt(rangeInput.max) , rangeMin = parseInt(rangeInput.min);
-    if(max > rangeMax){
-        max = rangeMax;
-    }
-    else if(max < rangeMin){
-        max = rangeMin;
-    }
-    return max;
+    return a;
 }
 
 function minmaxRange(){
     let min = 0 , max = 0;
-    min = findMin(parseInt(rangeInput[0].value) , parseInt(rangeInput[1].value));
-    max = findMax(parseInt(rangeInput[0].value) , parseInt(rangeInput[1].value));
+    let value0 = parseInt(rangeInput[0].value) , value1 = parseInt(rangeInput[1].value);
+    min = Math.min(value0 , value1);
+    max = Math.max(value0 , value1);
     slideInput[0].min = min;
-    slideInput[0].max = max;
-    slideInput[1].min = min;
     slideInput[1].max = max;
+    slideInput[0].min = min;
+    slideInput[1].max = max;
+    minRange = min;
+    maxRange = max;
+    checkNumber();
+    checkSlide();
 }
 
 function checkNumber(){
-    minnum = findMin(parseInt(numInput[0].value) , parseInt(numInput[1].value));
-    maxnum = findMax(parseInt(numInput[0].value) , parseInt(numInput[1].value));
-    slideInput[0].value = minnum;
-    slideInput[1].value = maxnum;
+    let min = 0 , max = 0;
+    let value0 = parseInt(numInput[0].value) , value1 = parseInt(numInput[1].value);
+    min = Math.min(value0 , value1);
+    max = Math.max(value0 , value1);
+    min = overRange(min);
+    max = overRange(max);
+    slideInput[0].value = min;
+    slideInput[1].value = max;
+    numInput[0].value = min;
+    numInput[1].value = max;
 }
 
 function checkSlide(){
-    numInput[0].value = findMin(parseInt(slideInput[0].value) , parseInt(slideInput[1].value));
-    numInput[1].value = findMax(parseInt(slideInput[0].value) , parseInt(slideInput[1].value));
+    let min = 0 , max = 0;
+    let value0 = parseInt(slideInput[0].value) , value1 = parseInt(slideInput[1].value);
+    min = Math.min(value0 , value1);
+    max = Math.max(value0 , value1);
+    min = overRange(min);
+    max = overRange(max);
+    numInput[0].value = min;
+    numInput[1].value = max;
+    slideInput[0].value = min;
+    slideInput[1].value = max;
 }
 
 numInput[0].addEventListener('input' , checkNumber);
@@ -59,4 +62,4 @@ slideInput[1].addEventListener('input' , checkSlide);
 rangeInput[0].addEventListener('input' , minmaxRange);
 rangeInput[1].addEventListener('input' , minmaxRange);
 
-check();
+minmaxRange();
