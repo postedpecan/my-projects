@@ -4,7 +4,7 @@ const rangeInput = document.querySelectorAll('.rangeInp input');
 
 let minRange = 0 ,maxRange = 10000;
 
-function overRange(a){
+function overRangeMin(a){
     if(a < minRange){
         a = minRange;
     }
